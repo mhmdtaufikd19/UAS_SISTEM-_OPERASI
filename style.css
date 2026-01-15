@@ -1,0 +1,146 @@
+body{
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Poppins';
+    background-color: #f1f1f1;
+}
+
+.navbar{
+    display: flex;
+    height: 120px;
+    padding: 10px 100px 10px 100px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    justify-content: space-between;
+}
+.navbar .menu{
+    align-self: center;
+}
+.navbar .menu ul{
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    font-size: 28px;
+    font-weight: 500;
+}
+.navbar img{
+    align-self: center;
+}
+
+.navbar .menu ul a{
+    text-decoration: none;
+    color: black;
+}
+
+.navbar .menu ul a:hover{
+    color: #0266AE;
+}
+
+.hero img{
+    width: 100%;
+    height: auto;
+    background-size: cover;
+}
+
+.product{
+    justify-items: center;
+}
+.product .title-product{
+    width: 91.5%;
+    height: 70px;
+    border-radius: 50px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    justify-items: center;
+    border: #dbdbdb 2px solid;
+    background-color: #e8e8e8;
+    border-style: none;
+    padding: 0;
+}
+.product .title-product h2{
+    font-size: 40px;
+    justify-self: center;
+    align-self: center;
+}
+
+.product .row{
+    padding-left: 100px;
+    padding-right: 100px;
+    display: flex;
+    justify-items: center;
+    gap: 28px;
+    margin-bottom: 28px;
+}
+
+.product .card{
+    border: #dbdbdb 2px solid;
+    border-radius: 20px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    font-size: 22px;
+    font-weight: 500;
+    margin: auto;
+    width: 550px;
+    height: 450px;
+
+}
+.product .card img{
+    width: 60%;
+    align-items: center;
+    height: auto;
+}
+
+.kontak{
+    width: 100%;
+    
+}
+.kontak .informasi ul{
+    list-style: none;
+    gap: 50px;
+    font-size: 28px;
+    font-weight: 500;
+}
+
+.kontak .informasi ul a{
+    text-decoration: none;
+    color: black;
+}
+
+.footer{
+    margin-top: 30px;
+    padding: 60px;
+    background-color: #0266AE;
+    height: 480px;
+    justify-items: center;
+    align-items: center;
+    color: #dbdbdb;
+}
+.footer .info{
+    margin-top: 60px;
+    display: flex;
+    gap: 30px;
+    width: 100%;
+}
+.footer .info .tentang_kami{
+    width: 35%;
+    font-size: 22px;
+}
+.footer .info .jam_operasional{
+    width: 25%;
+    font-size: 22px;
+}
+.footer .info .lokasi_kami{
+    width: 20%;
+    font-size: 22px;
+}
+.footer .info .kontak{
+    width: 20%;
+    font-size: 22px;
+}
+.cr{
+    justify-items: center;
+    font-size: 22px;
+    font-weight: 600;
+}
+
