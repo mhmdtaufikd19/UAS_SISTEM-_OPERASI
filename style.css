@@ -1,146 +1,258 @@
-body{
-    margin: 0px;
-    padding: 0px;
-    font-family: 'Poppins';
+/* GLOBAL */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
     background-color: #f1f1f1;
 }
 
-.navbar{
-    display: flex;
-    height: 120px;
-    padding: 10px 100px 10px 100px;
-    box-sizing: border-box;
-    background-color: #ffffff;
-    justify-content: space-between;
-}
-.navbar .menu{
-    align-self: center;
-}
-.navbar .menu ul{
-    list-style: none;
-    display: flex;
-    gap: 50px;
-    font-size: 28px;
-    font-weight: 500;
-}
-.navbar img{
-    align-self: center;
+
+/* NAVBAR */
+.navbar {
+    min-height: 120px;
+    padding: 10px 100px;
 }
 
-.navbar .menu ul a{
-    text-decoration: none;
+.navbar-brand img {
+    max-height: 80px;
+}
+
+.navbar-nav .nav-link {
+    font-size: 22px;
+    font-weight: 500;
     color: black;
 }
 
-.navbar .menu ul a:hover{
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
     color: #0266AE;
 }
 
-.hero img{
+/* HERO */
+.hero img,
+section img {
     width: 100%;
     height: auto;
-    background-size: cover;
+    object-fit: cover;
 }
 
-.product{
-    justify-items: center;
+/* ===== katalog card ===== */
+/* CARD */
+.product-card {
+    border-radius: 18px;
+    overflow: hidden;
+    background: #f7f7f7;
+    border: 1px solid #eee;
+    transition: 0.25s ease;
 }
-.product .title-product{
-    width: 91.5%;
-    height: 70px;
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+}
+
+/* IMAGE WRAPPER */
+.image-box {
+    position: relative;
+    background: #fff;
+    padding: 25px;
+}
+
+/* ZOOM ANIMATION */
+.img-zoom-container {
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.product-image {
+    transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.12);
+}
+
+/* BADGE */
+.badge-sold {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #e60023;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 12px;
     border-radius: 50px;
-    margin-top: 50px;
+    font-weight: bold;
+    z-index: 99;
+}
+
+.badge-available {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: #28b63f;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 50px;
+    font-weight: bold;
+    z-index: 99;
+}
+
+/* FAVORITE BUTTON */
+.fav-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: #fff;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    font-size: 18px;
+    transition: 0.2s ease;
+    z-index: 99;
+}
+
+.fav-btn:hover {
+    background: #ffe0e0;
+    transform: scale(1.1);
+}
+
+/* TEXT */
+.product-title {
+    font-weight: 700;
+    color: #1c2b55;
+    margin: 0;
+}
+
+.product-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #e60023;
+    margin-top: 4px;
+}
+
+/* ADD TO CART */
+.add-cart-btn {
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 10px;
+    margin-bottom: 12px;
+}
+
+.add-cart-btn:hover {
+    background: #0033ff;
+}
+
+/* BUTTON HABIS */
+.btn-sold {
+    padding: 13px;
+    border-radius: 0;
+    font-weight: bold;
+    border: none;
+    border-top: 1px solid #eee;
+}
+
+/*  product CARD */
+
+.brand-card {
+    border-radius: 12px;
+    padding: 15px;
+    border: 1px solid #eee;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    transition: 0.25s ease;
     margin-bottom: 20px;
-    justify-items: center;
-    border: #dbdbdb 2px solid;
-    background-color: #e8e8e8;
-    border-style: none;
-    padding: 0;
-}
-.product .title-product h2{
-    font-size: 40px;
-    justify-self: center;
-    align-self: center;
 }
 
-.product .row{
-    padding-left: 100px;
-    padding-right: 100px;
-    display: flex;
-    justify-items: center;
-    gap: 28px;
-    margin-bottom: 28px;
+.brand-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card);
 }
 
-.product .card{
-    border: #dbdbdb 2px solid;
-    border-radius: 20px;
-    display: flex;
-    justify-items: center;
-    align-items: center;
+.brand-card img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+}
+
+@media(max-width: 768px) {
+    .brand-card {
+        height: 80px;
+        width: auto;
+    }
+
+    .brand-card img {
+        max-height: 100%;
+        max-width: 100%;
+    }
+}
+
+/* KONTAK */
+section.container ul li {
     font-size: 22px;
     font-weight: 500;
-    margin: auto;
-    width: 550px;
-    height: 450px;
-
-}
-.product .card img{
-    width: 60%;
-    align-items: center;
-    height: auto;
+    margin-bottom: 20px;
 }
 
-.kontak{
-    width: 100%;
-    
-}
-.kontak .informasi ul{
-    list-style: none;
-    gap: 50px;
-    font-size: 28px;
-    font-weight: 500;
+section.container ul li i {
+    color: #0266AE;
 }
 
-.kontak .informasi ul a{
-    text-decoration: none;
-    color: black;
+/* FOOTER */
+footer {
+    background-color: #0266AE !important;
 }
 
-.footer{
-    margin-top: 30px;
-    padding: 60px;
-    background-color: #0266AE;
-    height: 480px;
-    justify-items: center;
-    align-items: center;
-    color: #dbdbdb;
+footer h5 {
+    font-size: 24px;
+    margin-bottom: 15px;
 }
-.footer .info{
-    margin-top: 60px;
-    display: flex;
-    gap: 30px;
-    width: 100%;
+
+footer p {
+    font-size: 20px;
+    line-height: 1.6;
 }
-.footer .info .tentang_kami{
-    width: 35%;
-    font-size: 22px;
+
+footer img {
+    max-width: 200px;
 }
-.footer .info .jam_operasional{
-    width: 25%;
-    font-size: 22px;
-}
-.footer .info .lokasi_kami{
-    width: 20%;
-    font-size: 22px;
-}
-.footer .info .kontak{
-    width: 20%;
-    font-size: 22px;
-}
-.cr{
-    justify-items: center;
-    font-size: 22px;
+
+/* COPYRIGHT */
+.text-center.bg-secondary {
+    font-size: 20px;
     font-weight: 600;
 }
 
+/* RESPONSIVE */
+@media (max-width: 992px) {
+    .navbar {
+        padding: 10px 30px;
+    }
+
+    section.container h2 {
+        font-size: 32px;
+    }
+
+    .card {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    section.container h2 {
+        font-size: 26px;
+    }
+
+    footer p {
+        font-size: 16px;
+    }
+}
