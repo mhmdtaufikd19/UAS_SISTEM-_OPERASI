@@ -212,6 +212,31 @@ section.container ul li i {
     color: #0266AE;
 }
 
+.testimonials .card {
+    border: none;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.testimonials .card-text {
+    font-style: italic;
+}
+
+.testimonials img {
+    width: 50px;
+    height: 50px;
+}
+.testimonials .container .card .card-body .card-image{
+    width: 90px;
+    height: 90px;
+    border-radius: 25px;
+}
+.testimonials .container .card .card-body .card-image img{
+    width: 90%;
+    height: 90%;
+    background-size: cover;
+    border-radius: 5px;
+}
+
 /* FOOTER */
 footer {
     background-color: #0266AE !important;
