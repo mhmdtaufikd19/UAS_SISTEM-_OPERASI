@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -24,7 +28,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="aset/logocetak.in.png" width="200" alt="">
+                <img src="../../aset/logocetak.in.png" width="200" alt="">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -32,13 +36,28 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
                 <ul class="navbar-nav gap-3">
-                    <li class="nav-item"><a class="nav-link active" href="index.html">Beranda</a></li>
-                    <li class="nav-item"><a class="nav-link" href="product.html">Produk</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="index.php">Beranda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="product.php">Produk</a></li>
                     <li class="nav-item"><a class="nav-link" href="kontak.html">Kontak</a></li>
                 </ul>
             </div>
         </div>
     </nav>
+    <?php
+require_once '../../database/connection.php';
+require_once '../../model/Product.php';
+
+if (!isset($_GET['id'])) {
+    die('Produk tidak ditemukan');
+}
+
+$productModel = new Product($pdo);
+$product = $productModel->find($_GET['id']);
+
+if (!$product) {
+    die('Produk tidak ditemukan');
+}
+?>
 
     <div class="container py-5">
         <div class="row g-4">
@@ -46,50 +65,60 @@
             <!-- LEFT PRODUCT IMAGE -->
             <div class="col-lg-5">
                 <div class="zoom-container border rounded p-3">
-                    <img src="aset/banner.png" class="img-fluid w-100 rounded zoom-image" alt="Product Image">
+                    <img src="<?= htmlspecialchars($product['gambar']) ?>" class="img-fluid w-100 rounded zoom-image"
+                        alt="<?= htmlspecialchars($product['nama_produk']) ?>">
                 </div>
             </div>
-
 
             <!-- RIGHT PRODUCT DETAILS -->
             <div class="col-lg-7">
 
                 <!-- PRODUCT TITLE -->
                 <h3 class="fw-bold">
-                    BANNER
+                    <?= htmlspecialchars($product['nama_produk']) ?>
                 </h3>
 
-                <!-- RATING -->
+                <!-- RATING (STATIC DULU) -->
                 <div class="d-flex align-items-center mb-2">
                     <span class="text-warning fs-5">★ ★ ★ ★ ★</span>
                     <span class="ms-2 text-muted">(0 review produk)</span>
                 </div>
 
                 <!-- STOCK -->
-                <p class="text-danger fw-semibold"> x Out of Stock</p>
+                <?php if ($product['stok_produk'] > 0 && $product['is_available']): ?>
+                <p class="text-success fw-semibold">✔ Stok tersedia</p>
+                <?php else: ?>
+                <p class="text-danger fw-semibold">✖ Out of Stock</p>
+                <?php endif; ?>
 
                 <!-- PRICE -->
-                <h4 class="fw-bold mb-4">Rp 20.000/meter</h4>
+                <h4 class="fw-bold mb-4">
+                    Rp <?= number_format($product['harga'], 0, ',', '.') ?>
+                </h4>
 
                 <!-- QTY & BUTTON -->
                 <div class="d-flex align-items-center gap-2 mb-4">
 
                     <!-- Quantity -->
                     <div class="input-group" style="width: 120px;">
-                        <button class="btn btn-outline-secondary">-</button>
+                        <button class="btn btn-outline-secondary" type="button">-</button>
                         <input type="text" class="form-control text-center" value="1">
-                        <button class="btn btn-outline-secondary">+</button>
+                        <button class="btn btn-outline-secondary" type="button">+</button>
                     </div>
 
-                    <!-- Buy Button -->
-                  
-                    <!-- Add to Cart -->
-                    <a target="_blank" href="https://wa.me/6285643351736">
-
+                    <!-- Pesan -->
+                    <?php if ($product['stok_produk'] > 0 && $product['is_available']): ?>
+                    <a target="_blank"
+                        href="https://wa.me/6285643351736?text=Halo,%20saya%20ingin%20memesan%20produk%20<?= urlencode($product['nama_produk']) ?>">
                         <button class="btn btn-outline-primary">
                             + Pesan
                         </button>
                     </a>
+                    <?php else: ?>
+                    <button class="btn btn-outline-secondary" disabled>
+                        Tidak tersedia
+                    </button>
+                    <?php endif; ?>
 
                     <!-- Wishlist -->
                     <button class="btn btn-outline-dark">
@@ -98,7 +127,7 @@
                 </div>
 
                 <!-- TABS -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs" role="tablist">
                     <li class="nav-item">
                         <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#desc">
                             Deskripsi
@@ -109,12 +138,8 @@
                 <div class="tab-content p-3 border-bottom border-start border-end rounded-bottom">
 
                     <div class="tab-pane fade show active" id="desc">
-                        Banner yaitu alat media visual berbentuk lembaran desain grafis yang digunakan untuk
-                        menyampaikan
-                        informasi, promosi, atau pesan tertentu kepada khalayak umum. Banner biasanya memadukan teks,
-                        gambar, warna, dan tata letak agar pesan dapat dipahami secara cepat dan menarik.
+                        <?= nl2br(htmlspecialchars($product['deskripsi'])) ?>
                     </div>
-
 
                 </div>
 
@@ -126,52 +151,12 @@
         </div>
     </div>
 
-    <!-- KATALOG SECTION -->
-    <div class="container my-5">
-        <h4 class="title pb-2">Produk serupa</h4>
 
-        <div class="row g-4">
-
-            <!-- PRODUCT CARD -->
-            <div class="col-12 col-sm-6 col-lg-3">
-                <a href="banner.html" class="text-decoration-none">
-                    <div class="product-card">
-
-                        <!-- IMAGE BOX -->
-                        <div class="image-box">
-
-                            <div class="img-zoom-container">
-                                <img src="aset/banner.png" class="img-fluid product-image">
-                            </div>
-                        </div>
-
-                        <div class="p-3">
-                            <h6 class="product-title">Banner Promosi</h6>
-                            <p class="product-price">Rp 20.000/meter</p>
-
-                            <!-- ADD TO CART BUTTON -->
-                            <button class="btn btn-primary w-100 add-cart-btn">
-                                <i class="bi bi-cart-plus"></i> Pesan
-                            </button>
-                        </div>
-                        <!-- 
-                    <button class="btn btn-danger w-100 btn-sold">
-                        ✖ Habis
-                    </button> -->
-                    </div>
-                </a>
-            </div>
-
-            <!-- DUPLICATE THIS CARD FOR MORE PRODUCTS -->
-
-        </div>
-
-    </div>
     <!-- FOOTER -->
     <footer class="#0266AE text-white py-5">
         <div class="container text-center text-md-start">
             <div class="mb-4 text-center">
-                <img src="aset/logo2.png" class="img-fluid" alt="">
+                <img src="../../aset/logo2.png" class="img-fluid" alt="">
             </div>
             <div class="row g-4 d-md-flex justify-content-around">
 
